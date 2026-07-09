@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Hack4Freedom Brasil — Speakers</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #0c0f13;
+    --bg-block: #12161d;
+    --bg-block-hover: #161b23;
+    --line: rgba(232,229,222,0.10);
+    --text: #e9e6df;
+    --text-dim: #9aa0ac;
+    --text-faint: #5b616d;
+    --orange: #f2398f;
+    --orange-dim: rgba(242,57,143,0.35);
+    --teal: #49c9b8;
+    --teal-dim: rgba(73,201,184,0.16);
+    --coral: #e2764f;
+    --coral-dim: rgba(226,118,79,0.16);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--text);
+    font-family:'Lora', serif;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  .mono{font-family:'IBM Plex Mono', monospace;}
+  ::selection{background:var(--orange-dim); color:var(--text);}
+
+  /* ---------- HERO ---------- */
+  .hero{
+    max-width:980px;
+    margin:0 auto;
+    padding:88px 28px 48px;
+    border-bottom:1px solid var(--line);
+  }
+  .eyebrow{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12.5px;
+    letter-spacing:0.18em;
+    text-transform:uppercase;
+    color:var(--orange);
+    display:flex;
+    align-items:center;
+    gap:10px;
+    margin-bottom:22px;
+  }
+  .eyebrow::before{
+    content:"";
+    width:7px;height:7px;border-radius:50%;
+    background:var(--orange);
+    box-shadow:0 0 0 3px var(--orange-dim);
+  }
+  h1.title{
+    font-family:'IBM Plex Mono', monospace;
+    font-weight:700;
+    font-size:clamp(38px, 7vw, 68px);
+    line-height:1.02;
+    letter-spacing:-0.02em;
+    margin:0 0 20px;
+  }
+  h1.title span{color:var(--orange);}
+  .hero p.lede{
+    font-size:18px;
+    color:var(--text-dim);
+    max-width:640px;
+    margin:0 0 30px;
+  }
+  .hero-meta{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px 28px;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:13px;
+    color:var(--text-faint);
+  }
+  .hero-meta b{color:var(--text-dim); font-weight:600;}
+
+  /* ---------- FILTER BAR ---------- */
+  .filterbar{
+    position:sticky; top:0; z-index:20;
+    background:rgba(12,15,19,0.92);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);
+  }
+  .filterbar-inner{
+    max-width:980px;
+    margin:0 auto;
+    padding:14px 28px;
+    display:flex;
+    align-items:center;
+    gap:10px;
+    flex-wrap:wrap;
+  }
+  .filterbar-label{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11.5px;
+    letter-spacing:0.1em;
+    text-transform:uppercase;
+    color:var(--text-faint);
+    margin-right:6px;
+  }
+  .chip{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12.5px;
+    padding:7px 14px;
+    border-radius:100px;
+    border:1px solid var(--line);
+    background:transparent;
+    color:var(--text-dim);
+    cursor:pointer;
+    transition:all .15s ease;
+  }
+  .chip:hover{border-color:var(--text-faint); color:var(--text);}
+  .chip.active{background:var(--orange); color:#12100a; border-color:var(--orange); font-weight:600;}
+
+  /* ---------- LEDGER / TIMELINE ---------- */
+  .ledger{
+    max-width:980px;
+    margin:0 auto;
+    padding:10px 28px 120px;
+    position:relative;
+  }
+  .ledger::before{
+    content:"";
+    position:absolute;
+    left:28px;
+    top:0; bottom:0;
+    width:1px;
+    background:linear-gradient(to bottom, transparent, var(--line) 4%, var(--line) 96%, transparent);
+  }
+  @media (max-width:640px){ .ledger::before{ left:14px; } }
+
+  .day{
+    margin-top:56px;
+  }
+  .day:first-child{margin-top:34px;}
+  .day-head{
+    position:relative;
+    padding-left:64px;
+    margin-bottom:22px;
+  }
+  @media (max-width:640px){ .day-head{ padding-left:38px; } }
+  .day-head::before{
+    content:"";
+    position:absolute;
+    left:22px; top:6px;
+    width:13px; height:13px;
+    border-radius:50%;
+    background:var(--bg);
+    border:2px solid var(--orange);
+  }
+  @media (max-width:640px){ .day-head::before{ left:8px; } }
+  .day-num{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11px;
+    color:var(--text-faint);
+    letter-spacing:0.08em;
+  }
+  .day-date{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:20px;
+    font-weight:600;
+    color:var(--text);
+    margin-top:2px;
+  }
+
+  .milestone{
+    position:relative;
+    padding-left:64px;
+    margin-bottom:14px;
+  }
+  @media (max-width:640px){ .milestone{ padding-left:38px; } }
+  .milestone::before{
+    content:"";
+    position:absolute;
+    left:24px; top:9px;
+    width:8px; height:8px;
+    border-radius:50%;
+    background:var(--text-faint);
+  }
+  @media (max-width:640px){ .milestone::before{ left:10px; } }
+  .milestone-inner{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:13px;
+    color:var(--text-faint);
+    padding:10px 16px;
+    border:1px dashed var(--line);
+    border-radius:8px;
+    display:inline-block;
+  }
+
+  .card{
+    position:relative;
+    padding-left:64px;
+    margin-bottom:22px;
+  }
+  @media (max-width:640px){ .card{ padding-left:38px; } }
+  .card::before{
+    content:"";
+    position:absolute;
+    left:23px; top:26px;
+    width:10px; height:10px;
+    border-radius:2px;
+    background:var(--orange);
+    transform:rotate(45deg);
+  }
+  @media (max-width:640px){ .card::before{ left:9px; } }
+  .card-inner{
+    background:var(--bg-block);
+    border:1px solid var(--line);
+    border-radius:12px;
+    padding:26px 26px 24px;
+    transition:background .15s ease, border-color .15s ease;
+  }
+  .card-inner:hover{background:var(--bg-block-hover); border-color:rgba(232,229,222,0.18);}
+
+  .card-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    flex-wrap:wrap;
+    gap:10px 16px;
+    margin-bottom:6px;
+  }
+  .block-id{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11px;
+    color:var(--text-faint);
+    letter-spacing:0.05em;
+  }
+  .tag{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11px;
+    letter-spacing:0.06em;
+    text-transform:uppercase;
+    padding:4px 10px;
+    border-radius:100px;
+    white-space:nowrap;
+  }
+  .tag.presencial{ background:var(--coral-dim); color:var(--coral); }
+  .tag.online{ background:var(--teal-dim); color:var(--teal); }
+
+  .speaker-name{
+    font-family:'IBM Plex Mono', monospace;
+    font-weight:700;
+    font-size:19px;
+    color:var(--text);
+    margin:2px 0 4px;
+  }
+  .talk-title{
+    font-family:'Lora', serif;
+    font-style:italic;
+    font-weight:600;
+    font-size:18px;
+    color:var(--orange);
+    margin:0 0 14px;
+  }
+  .talk-time{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12.5px;
+    color:var(--text-faint);
+    margin-bottom:16px;
+  }
+  .desc, .bio{
+    font-size:15px;
+    color:var(--text-dim);
+  }
+  .desc{margin-bottom:14px;}
+  .desc p, .bio p{margin:0 0 10px;}
+  .desc p:last-child, .bio p:last-child{margin-bottom:0;}
+  .bio-label{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:10.5px;
+    letter-spacing:0.1em;
+    text-transform:uppercase;
+    color:var(--text-faint);
+    margin:16px 0 8px;
+    border-top:1px solid var(--line);
+    padding-top:14px;
+  }
+  .schedule{
+    display:flex;
+    flex-direction:column;
+    gap:6px;
+  }
+  .schedule-item{
+    display:flex;
+    gap:16px;
+    font-size:14.5px;
+    color:var(--text-dim);
+    font-family:'Lora', serif;
+  }
+  .schedule-time{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12.5px;
+    color:var(--orange);
+    min-width:52px;
+    flex-shrink:0;
+  }
+  .link-btn{
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    margin-top:16px;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12.5px;
+    color:var(--orange);
+    text-decoration:none;
+    border-bottom:1px solid var(--orange-dim);
+    padding-bottom:2px;
+  }
+  .link-btn:hover{border-color:var(--orange);}
+
+  footer{
+    max-width:980px;
+    margin:0 auto;
+    padding:40px 28px 80px;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px;
+    color:var(--text-faint);
+    border-top:1px solid var(--line);
+  }
+
+  .hidden{display:none !important;}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="eyebrow">Hack4Freedom Brasil · 12–26 julho 2026 · São Paulo</div>
+  <h1 class="title">Quem vai te<br>acompanhar no <span>Hackathon</span></h1>
+  <p class="lede">Um bloco por dia, um encontro por vez: 15 dias de talks e workshops com quem constrói o ecossistema Bitcoin, Lightning e open source hoje — de protocolo a produto, de privacidade a pitch.</p>
+  <div class="hero-meta">
+    <span><b>20</b> sessões</span>
+    <span><b>18</b> speakers</span>
+    <span><b>6</b> encontros presenciais</span>
+    <span><b>14</b> encontros online</span>
+  </div>
+</div>
+
+<div class="filterbar">
+  <div class="filterbar-inner">
+    <span class="filterbar-label">Filtrar</span>
+    <button class="chip active" data-filter="all">Todos</button>
+    <button class="chip" data-filter="presencial">Presencial</button>
+    <button class="chip" data-filter="online">Online</button>
+  </div>
+</div>
+
+<div class="ledger">
+
+  <!-- DOMINGO 12/07 — ABERTURA -->
+  <div class="day">
+    <div class="day-head"><div class="day-num">BLOCO 00</div><div class="day-date">Domingo, 12 de julho</div></div>
+
+    <div class="card" data-format="presencial">
+      <div class="card-inner">
+        <div class="card-top"><span class="block-id">#H4F–0112</span><span class="tag presencial">Presencial</span></div>
+        <div class="speaker-name">Abertura Hack4Freedom</div>
+        <div class="talk-title">Integração, alinhamento e formação dos times</div>
+        <div class="talk-time">14h – 18h</div>
+        <div class="desc">
+          <p>O primeiro dia do Hack4Freedom será dedicado à integração das participantes, ao alinhamento sobre o evento e à formação dos times. A programação começa com a recepção e o credenciamento, seguida de apresentações individuais para que todas possam se conhecer, compartilhar suas habilidades e motivações.</p>
+          <p>Ao longo da tarde, as participantes serão recebidas pela equipe organizadora e conhecerão a proposta do hackathon, além de uma introdução ao Bitcoin e seus principais fundamentos em uma sessão conduzida por mentoras. Também haverá um momento dedicado para esclarecer dúvidas sobre a dinâmica do evento, as ferramentas que serão utilizadas, as regras e o funcionamento da mentoria.</p>
+          <p>Na sequência, acontecerá uma sessão de networking, em que as participantes poderão conhecer os mentores, trocar ideias e formar suas equipes para o desenvolvimento dos projetos. O dia será encerrado com registros em foto e vídeo e, para quem desejar, um coquetel de confraternização para continuar as conversas e fortalecer as conexões entre as participantes.</p>
+        </div>
+        <div class="bio-label">Programação</div>
+        <div class="schedule">
+          <div class="schedule-item"><span class="schedule-time">14h</span><span>Recepção e Abertura</span></div>
+          <div class="schedule-item"><span class="schedule-time">14h30</span><span>Apresentações individuais</span></div>
+          <div class="schedule-item"><span class="schedule-time">14h45</span><span>Brianna</span></div>
+          <div class="schedule-item"><span class="schedule-time">14h55</span><span>Thaiz Batista</span></div>
+          <div class="schedule-item"><span class="schedule-time">15h15</span><span>Lucas Ferreira</span></div>
+          <div class="schedule-item"><span class="schedule-time">15h25</span><span>Viviane Nogueira</span></div>
+          <div class="schedule-item"><span class="schedule-time">15h45</span><span>Mentorias e sessão de perguntas</span></div>
+          <div class="schedule-item"><span class="schedule-time">17h30</span><span>Coquetel</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- SEGUNDA 13/07 -->
+  <div class="day">
+    <div class="day-head"><div class="day-num">BLOCO 01</div><div class="day-date">Segunda, 13 de julho</div></div>
+
+    <div class="card" data-format="online">
+      <div class="card-inner">
+        <div class="card-top"><span class="block-id">#H4F–0113A</span><span class="tag online">Online</span></div>
+        <div class="speaker-name">Mkay (M.K. Fain)</div>
+        <div class="talk-title">Desenvolvimento acelerado para Nostr com Shakespeare, OpenCode e OpenRouter</div>
+        <div class="talk-time">16h – 18h</div>
+        <div class="desc"><p>Como criar aplicações para o ecossistema Nostr usando IA para acelerar o desenvolvimento: da ideia à implementação, combinando Shakespeare (construtor web integrado ao Git), OpenCode (dev assistido por IA via terminal) e OpenRouter (acesso a modelos de IA).</p></div>
+        <div class="bio-label">Mini bio</div>
+        <div class="bio"><p>Figura reconhecida nas comunidades de Bitcoin e Nostr, cofundadora e CEO da Soapbox Technology, organização de código aberto que cria ferramentas para a web descentralizada, IA e ativismo de base.</p></div>
+        <a class="link-btn" href="https://app.evento.so/e/evt_JBumanGh9swzp2jH" target="_blank" rel="noopener">Ver no Evento →</a>
+      </div>
+    </div>
+
+    <div class="card" data-format="presencial">
+      <div class="card-inner">
+        <div class="card-top"><span class="block-id">#H4F–0113B</span><span class="tag presencial">Presencial</span></div>
+        <div class="speaker-name">André Neves</div>
+        <div class="talk-title">Lightning Address e agentes de IA para desenvolvimento Bitcoin</div>
+        <div class="talk-time">18h – 20h</div>
+        <div class="desc"><p>Como o Lightning Address Protocol simplifica pagamentos em Bitcoin com endereços no estilo e-mail, e como agentes de IA no OpenCode aceleram o desenvolvimento — atualizando projetos e revisando vulnerabilidades em paralelo.</p></div>
+        <div class="bio-label">Mini bio</div>
+        <div class="bio"><p>CTO e cofundador da ZBD, criador do Lightning Address, protocolo open source que simplifica o envio de Bitcoin na Lightning Network. Também é cofundador e head of partnerships na Vinteum.</p></div>
+        <a class="link-btn" href="https://app.evento.so/e/evt_ebkg6r2WTu3pCRhn" target="_blank" rel="noopener">Ver no Evento →</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- TERÇA 14/07 -->
+  <div class="day">
+    <div class="day-head"><div class="day-num">BLOCO 02</div><div class="day-date">Terça, 14 de julho</div></div>
+
+    <div class="card" data-format="presencial">
+      <div class="card-inner">
+        <div class="card-top"><span class="block-id">#H4F–0114A</span><span class="tag presencial">Presencial</span></div>
+        <div class="speaker-name">Jãonoctus &amp; D++</div>
+        <div class="talk-title">Lightning Workshop</div>
+        <div class="talk-time">16h – 18h</div>
+        <div class="bio-label">Mini bio</div>
+        <div class="bio">
+          <p><b>Jãonoctus</b> é desenvolvedor de infraestrutura de pagamentos com Bitcoin e Lightning na ZBD, e Developer Advocate na Vinteum, formando e apoiando novos desenvolvedores.</p>
+          <p><b>D++</b> é educadora de Bitcoin, engenheira de software e cypherpunk, reconhecida mundialmente por seu trabalho na PLEBNET, iniciativa focada em avançar a adoção da Lightning Network.</p>
+        </div>
+        <a class="link-btn" href="https://app.evento.so/e/evt_CVL5V7592Ah1qjvt" target="_blank" rel="noopener">Ver no Evento →</a>
+      </div>
+    </div>
+
+    <div class="card" data-format="presencial">
+      <div class="card-inner">
+        <div class="card-top"><span class="block-id">#H4F–0114B</span><span class="tag presencial">Presencial</span></div>
+        <div class="speaker-name">Bruno Campos</div>
+        <div class="talk-title">Breez SDK: pagamentos Bitcoin non-custodial para aplicações reais</div>
+        <div class="talk-time">18h – 20h</div>
+        <div class="desc"><p>O Breez SDK para integrar pagamentos Bitcoin e Lightning sem abrir mão da autocustódia: a API, como abstrai a complexidade do Bitcoin, e uma demonstração de coding assistido por IA com foco em revisão e segurança.</p></div>
+        <div class="bio-label">Mini bio</div>
+        <div class="bio"><p>CEO da Klever, com mais de 30 anos em tecnologia na interseção entre blockchain, criptografia, cibersegurança e IA. Lidera infraestrutura open source para autocustódia e descentralização, e ainda programa em Golang lado a lado com os times de engenharia.</p></div>
+        <a class="link-btn" href="https://app.evento.so/e/evt_oPdwpwgwnFCpDVfS" target="_blank" rel="noopener">Ver no Evento →</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- QUARTA 15/07 -->
+  <div class="day">
+    <div class="day-head"><div class="day-num">BLOCO 03</div><div class="day-date">Quarta, 15 de julho</div></div>
+
+    <div class="card" data-format="online">
+      <div class="card-inner">
+        <div class="card-top"><span class="block-id">#H4F–0115A</span><span class="tag online">Online</span></div>
+        <div class="speaker-name">Lucca Godoy</div>
+        <div class="talk-title">Entendendo carteiras Bitcoin com BDK</div>
+        <div class="talk-time">10h – 12h</div>
+        <div class="desc"><p>Como uma carteira Bitcoin funciona por dentro usando a biblioteca BDK: geração e gerenciamento de chaves, construção de transações, acompanhamento de saldo e interação com a rede.</p></div>
+        <div class="bio-label">Mini bio</div>
+        <div class="bio"><p>Diretor de tecnologia da carteira Mooze.</p></div>
+        <a class="link-btn" href="https://app.evento.so/e/evt_mt2LEoZ7a7y4EQcf" target="_blank" rel="noopener">Ver no Evento →</a>
+      </div>
+    </div>
+
+    <div class="card" data-format="online">
+      <div class="card-inner">
+        <div class="card-top"><span class="block-id">#H4F–0115B</span><span class="tag online">Online</span></div>
+        <div class="speaker-name">Thiago Orikassa &amp; Emilia Roitman</div>
+        <div class="talk-title">Design de produto com IA para aplicações Bitcoin</div>
+        <div class="talk-time">13h – 15h</div>
+        <div class="desc"><p>Dois caminhos para transformar uma ideia em produto no ecossistema Bitcoin: o fluxo tradicional (pesquisa, prototipagem, testes) e uma abordagem acelerada com agentes de IA, validando hipóteses com usuários antes de escalar.</p></div>
+        <div class="bio-label">Mini bio</div>
+        <div class="bio">
+          <p><b>Thiago Orikassa</b> é Product Designer com foco em Bitcoin e liberdade financeira, atualmente na Bipa, na interseção entre design, usabilidade e soberania financeira.</p>
+          <p><b>Emilia Roitman</b> é Senior UX Content Designer na Decolar.com (Argentina), com passagem pelo South America Design Bootcamp da Bitcoin Design Foundation.</p>
+        </div>
+        <a class="link-btn" href="https://app.evento.so/e/evt_UmoMQpDpa5S5zM68" target="_blank" rel="noopener">Ver no Evento →</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- QUINTA 16/07 -->
+  <div class="day">
+    <div class="day-head"><div class="day-num">BLOCO 04</div><div class="day-date">Quinta, 16 de julho</div></div>
+
+    <div class="card" data-format="online">
+      <div class="card-inner">
+        <div class="card-top"><span class="block-id">#H4F–0116A</span><span class="tag online">Online</span></div>
+        <div class="speaker-name">Renata Rodrigues</div>
+        <div class="talk-title">Privacidade, liberdade financeira e redes descentralizadas</div>
+        <div class="talk-time">17h – 18h30</div>
+        <div class="desc"><p>Por que privacidade importa na construção de ecossistemas mais descentralizados e resilientes, e como Bitcoin, Lightning e redes federadas fortalecem a liberdade financeira de ativistas, jornalistas e comunidades em risco.</p></div>
+        <div class="bio-label">Mini bio</div>
+        <div class="bio"><p>Lidera operações de campo na Fedi, conectando tecnologias descentralizadas a comunidades reais. Antes, atuou na Paxful com foco em comunidade e educação para o mercado latino-americano de Bitcoin.</p></div>
+        <a class="link-btn" href="https://app.evento.so/e/evt_8GGEhXGYM4GL88sn" target="_blank" rel="noopener">Ver no Evento →</a>
+      </div>
+    </div>
+
+    <div class="card" data-format="online">
+      <div class="card-inner">
+        <div class="card-top"><span class="block-id">#H4F–0116B</span><span class="tag online">Online</span></div>
+        <div class="speaker-name">Dulce Villarreal</div>
+        <div class="talk-title">Frameworks de produto e IA: definindo projetos com Claude</div>
+        <div class="talk-time">18h30 – 19h30</div>
+        <div class="desc"><p>Como usar frameworks de produto para transformar uma ideia em proposta clara e estruturada — definindo problema, público, proposta de valor, riscos e próximos passos com apoio de IA.</p></div>
+        <div class="bio-label">Mini bio</div>
+        <div class="bio"><p>Product Manager, fundadora da Librería de Satoshi, iniciativa open source de educação em Bitcoin, privacidade e desenvolvimento para comunidades de língua espanhola.</p></div>
+        <a class="link-btn" href="https://app.evento.so/e/evt_Vf7Fo28b2SBzEebi" target="_blank" rel="noopener">Ver no Evento →</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- SEXTA 17/07 -->
+  <div class="day">
+    <div class="day-head"><div class="day-num">BLOCO 05</div><div class="day-date">Sexta, 17 de julho</div></div>
+
+    <div class="card" data-format="online">
+      <div class="card-inner">
+        <div class="card-top"><span class="block-id">#H4F–0117A</span><span class="tag online">Online</span></div>
+        <div class="speaker-name">Marcel Lorraine</div>
+        <div class="talk-title">Liberdade financeira é construir, não apenas usar</div>
+        <div class="talk-time">11h30 – 12h30</div>
+        <div class="desc"><p>Liberdade financeira a partir de propriedade, dignidade e autonomia — e um convite para sair do papel de usuária e ocupar também o de construtora da infraestrutura Bitcoin e open source.</p></div>
+        <div class="bio-label">Mini bio</div>
+        <div class="bio"><p>Fundadora da Bitcoin Dada, ecossistema de educação em Bitcoin e formação de desenvolvedoras presente em mais de 12 países africanos, já treinando centenas de mulheres em Lightning e contribuição open source.</p></div>
+        <a class="link-btn" href="https://app.evento.so/e/evt_VpTfkCWdvVpg2ypk" target="_blank" rel="noopener">Ver no Evento →</a>
+      </div>
+    </div>
+
+    <div class="card" data-format="online">
+      <div class="card-inner">
+        <div class="card-top"><span class="block-id">#H4F–0117B</span><span class="tag online">Online</span></div>
+        <div class="speaker-name">Isabella Rugna</div>
+        <div class="talk-title">Viver em Bitcoin: liberdade financeira, uso real e os desafios da usabilidade</div>
+        <div class="talk-time">14h – 16h</div>
+        <div class="desc"><p>Experiência vivendo uma rotina o mais bitcoin-only possível: o que funciona, o que ainda quebra, e por que usar Bitcoin de verdade ajuda a revelar gargalos e aproximar o ecossistema de produtos mais acessíveis.</p></div>
+        <div class="bio-label">Mini bio</div>
+        <div class="bio"><p>Social Media Coordinator na Bitrefill, com passagens pelo marketing da Azteco e como criadora de conteúdo para a Geyser, plataforma de crowdfunding em Bitcoin.</p></div>
+        <a class="link-btn" href="https://app.evento.so/e/evt_qJ2MkwuxiUtPFyRU" target="_blank" rel="noopener">Ver no Evento →</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- SÁBADO 18/07 -->
+  <div class="day">
+    <div class="day-head"><div class="day-num">BLOCO 06</div><div class="day-date">Sábado, 18 de julho</div></div>
+
+    <div class="card" data-format="online">
+      <div class="card-inner">
+        <div class="card-top"><span class="block-id">#H4F–0118A</span><span class="tag online">Online</span></div>
+        <div class="speaker-name">D++</div>
+        <div class="talk-title">Aprendendo Bitcoin jogando: gamificação, Lightning e educação prática</div>
+        <div class="talk-time">14h – 16h</div>
+        <div class="desc"><p>A partir do projeto Bitcoin-powered Mario Kart: como Lightning Addresses permitem micropagamentos instantâneos durante o jogo, e como gamificação aproxima novos públicos do Bitcoin.</p></div>
+        <div class="bio-label">Mini bio</div>
+        <div class="bio"><p>Educadora de Bitcoin, engenheira de software e cypherpunk, reconhecida por seu trabalho na PLEBNET (ver bio completa em 14/07).</p></div>
+        <a class="link-btn" href="https://app.evento.so/e/evt_Kpfb4KmthUGLLdjb" target="_blank" rel="noopener">Ver no Evento →</a>
+      </div>
+    </div>
+
+    <div class="card" data-format="online">
+      <div class="card-inner">
+        <div class="card-top"><span class="block-id">#H4F–0118B</span><span class="tag online">Online</span></div>
+        <div class="speaker-name">Lucas Ferreira</div>
+        <div class="talk-title">Por que construir em Bitcoin open source?</div>
+        <div class="talk-time">16h – 18h</div>
+        <div class="desc"><p>O ecossistema Bitcoin open source como caminho real de aprendizado e carreira: como contribuições públicas abrem portas para grants, empregos e colaboração internacional — e por que mais mulheres devem construir, não só usar.</p></div>
+        <div class="bio-label">Mini bio</div>
+        <div class="bio"><p>Fundador da Vinteum, organização sem fins lucrativos que treina e financia desenvolvedores open source de Bitcoin no Brasil, e organizador da Satsconf. Ex-integrante da Lightning Labs.</p></div>
+        <a class="link-btn" href="https://app.evento.so/e/evt_T5mLpRE47nuDeYdU" target="_blank" rel="noopener">Ver no Evento →</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- SEGUNDA 20/07 -->
+  <div class="day">
+    <div class="day-head"><div class="day-num">BLOCO 07</div><div class="day-date">Segunda, 20 de julho</div></div>
+
+    <div class="card" data-format="online">
+      <div class="card-inner">
+        <div class="card-top"><span class="block-id">#H4F–0120A</span><span class="tag online">Online</span></div>
+        <div class="speaker-name">MouxDesign (Mogashni Naidoo)</div>
+        <div class="talk-title">Criando produtos Bitcoin melhores com pesquisa de usuários e IA</div>
+        <div class="talk-time">10h – 11h30</div>
+        <div class="desc"><p>Por que pesquisa com usuários evita decisões baseadas só em suposições, como IA acelera roteiros de entrevista e análise de transcrições, e como o framework Jobs to Be Done ajuda a entender o que usuários de fato tentam resolver.</p></div>
+        <div class="bio-label">Mini bio</div>
+        <div class="bio"><p>UX Designer e consultora independente na Bitcoin Design Foundation, formada em Marketing com diploma em UX Design, unindo pesquisa, prototipagem e IA generativa ao processo criativo.</p></div>
+        <a class="link-btn" href="https://app.evento.so/e/evt_2KKcJKtVg6rYDEKW" target="_blank" rel="noopener">Ver no Evento →</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- TERÇA 21/07 -->
+  <div class="day">
+    <div class="day-head"><div class="day-num">BLOCO 08</div><div class="day-date">Terça, 21 de julho</div></div>
+
+    <div class="card" data-format="online">
+      <div class="card-inner">
+        <div class="card-top"><span class="block-id">#H4F–0121A</span><span class="tag online">Online</span></div>
+        <div class="speaker-name">Kanika Singh</div>
+        <div class="talk-title">Bitcoin para o bem: empatia e liberdade financeira para comunidades vulneráveis</div>
+        <div class="talk-time">11h – 12h</div>
+        <div class="desc"><p>Aprendizados práticos de projetos de empoderamento feminino, doações diretas e remessas — Bitcoin como ferramenta de solidariedade e impacto local, dando continuidade à visão de Hadiya Masieh, fundadora do Groundswell Project.</p></div>
+        <div class="bio-label">Mini bio</div>
+        <div class="bio"><p>Project Manager no Groundswell Project, na interseção entre Bitcoin, impacto social e fortalecimento comunitário, com foco em inclusão financeira e resiliência em comunidades vulneráveis.</p></div>
+        <a class="link-btn" href="https://app.evento.so/e/evt_UG3XCv7kzfDj9eY3" target="_blank" rel="noopener">Ver no Evento →</a>
+      </div>
+    </div>
+
+    <div class="card" data-format="online">
+      <div class="card-inner">
+        <div class="card-top"><span class="block-id">#H4F–0121B</span><span class="tag online">Online</span></div>
+        <div class="speaker-name">Claire Parkinson</div>
+        <div class="talk-title">Como organizar ideias e fazer um bom pitch</div>
+        <div class="talk-time">18h – 19h</div>
+        <div class="desc"><p>Ferramentas práticas de organização, gestão de projetos e comunicação para hackathons: definir prioridades, dividir tarefas, e construir um pitch claro que explica o problema, a solução e o progresso.</p></div>
+        <div class="bio-label">Mini bio</div>
+        <div class="bio"><p>Chief of Staff para o C-level da ZBD, formada em Environmental Economics and Policy pela UC Berkeley, com experiência prévia em manufatura aeroespacial e supply chain.</p></div>
+        <a class="link-btn" href="https://app.evento.so/e/evt_4LMumtjaUVSt3AJh" target="_blank" rel="noopener">Ver no Evento →</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- QUARTA 22/07 -->
+  <div class="day">
+    <div class="day-head"><div class="day-num">BLOCO 09</div><div class="day-date">Quarta, 22 de julho</div></div>
+
+    <div class="card" data-format="online">
+      <div class="card-inner">
+        <div class="card-top"><span class="block-id">#H4F–0122A</span><span class="tag online">Online</span></div>
+        <div class="speaker-name">Amiti Uttarwar</div>
+        <div class="talk-title">Da contribuição ao Bitcoin Core à construção de infraestrutura humana</div>
+        <div class="talk-time">18h</div>
+        <div class="desc"><p>Uma trajetória da contribuição técnica ao Bitcoin Core até a criação da Waye, e por que a infraestrutura Bitcoin depende não só de código, mas de pessoas bem apoiadas ao longo do tempo.</p></div>
+        <div class="bio-label">Mini bio</div>
+        <div class="bio"><p>Fundadora da Waye, organização que apoia desenvolvedores open source de tecnologias resistentes à censura. Primeira mulher reconhecida como contribuidora do Bitcoin Core; atuou também como engenheira de Bitcoin na Coinbase.</p></div>
+        <a class="link-btn" href="https://app.evento.so/e/evt_wmCZWopsrLMNZoV2" target="_blank" rel="noopener">Ver no Evento →</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- QUINTA 23/07 -->
+  <div class="day">
+    <div class="day-head"><div class="day-num">BLOCO 10</div><div class="day-date">Quinta, 23 de julho</div></div>
+
+    <div class="card" data-format="presencial">
+      <div class="card-inner">
+        <div class="card-top"><span class="block-id">#H4F–0123A</span><span class="tag presencial">Presencial</span></div>
+        <div class="speaker-name">Davidson Souza</div>
+        <div class="talk-title">Pequenas mágicas do protocolo Bitcoin</div>
+        <div class="talk-time">16h</div>
+        <div class="desc"><p>De UTXOs a Utreexo: como pensar como dev de protocolo, quais trade-offs importam, e por que construir em Bitcoin exige revisão cuidadosa e minimização de confiança — diferente da filosofia de web3 e cripto em geral.</p></div>
+        <div class="bio-label">Mini bio</div>
+        <div class="bio"><p>Desenvolvedor open source de Bitcoin, mantenedor do Floresta e do Rustreexo, grantee da Vinteum, e coautor de propostas de BIP relacionadas ao Utreexo ao lado de Tadge Dryja e Calvin Kim.</p></div>
+        <a class="link-btn" href="https://app.evento.so/e/evt_HNELqYw1uNjtsYvF" target="_blank" rel="noopener">Ver no Evento →</a>
+      </div>
+    </div>
+
+    <div class="card" data-format="presencial">
+      <div class="card-inner">
+        <div class="card-top"><span class="block-id">#H4F–0123B</span><span class="tag presencial">Presencial</span></div>
+        <div class="speaker-name">Cindy</div>
+        <div class="talk-title">Você não precisa começar pronta: caminhos para pesquisar Bitcoin</div>
+        <div class="talk-time">17h30</div>
+        <div class="desc"><p>Um relato honesto sobre chegar ao desenvolvimento de protocolo vindo do Direito e da empreitada em pets — pelos Mastering Seminars da Vinteum e o Bitcoin Dev Launchpad — até pesquisar privacidade em Bitcoin sem o "background perfeito".</p></div>
+        <div class="bio-label">Mini bio</div>
+        <div class="bio"><p>Fellow da Vinteum, com pesquisa aplicada em privacidade no Bitcoin — Payjoin, fingerprints e multiparty transactions — mentorada por Yuval "nothingmuch" e Armin Sabouri.</p></div>
+        <a class="link-btn" href="https://app.evento.so/e/evt_MLE2qJUAmb6G5Dk8" target="_blank" rel="noopener">Ver no Evento →</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- SEXTA 24/07 -->
+  <div class="milestone">
+    <div class="milestone-inner">SEX 24/07 — Dia de submissão dos projetos (online)</div>
+  </div>
+
+  <!-- SÁBADO 25/07 -->
+  <div class="milestone">
+    <div class="milestone-inner">SÁB 25/07 · 14h–18h — Demo Day (presencial)</div>
+  </div>
+
+  <!-- DOMINGO 26/07 -->
+  <div class="milestone">
+    <div class="milestone-inner">DOM 26/07 — Opcional · Programação social</div>
+  </div>
+
+</div>
+
+<footer>
+  Hack4Freedom Brasil · 12–26 julho 2026 · São Paulo — hackathon de Bitcoin e open source
+</footer>
+
+<script>
+  const chips = document.querySelectorAll('.chip');
+  const cards = document.querySelectorAll('.card');
+  chips.forEach(chip => {
+    chip.addEventListener('click', () => {
+      chips.forEach(c => c.classList.remove('active'));
+      chip.classList.add('active');
+      const filter = chip.dataset.filter;
+      cards.forEach(card => {
+        if (filter === 'all' || card.dataset.format === filter) {
+          card.classList.remove('hidden');
+        } else {
+          card.classList.add('hidden');
+        }
+      });
+    });
+  });
+</script>
+
+</body>
+</html>
